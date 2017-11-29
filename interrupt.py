@@ -30,4 +30,3 @@ while True:
         r = requests.get('https://maker.ifttt.com/trigger/meeseeks/with/key/o69VXHFIIvpjo0CKEbwYNt_OiQbzhyfU-Grlzf8GXdR')
     except KeyboardInterrupt:
         GPIO.cleanup()
-        
