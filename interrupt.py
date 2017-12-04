@@ -37,7 +37,7 @@ while running:
         else:
             logging.debug('Turning lights off')
             r = requests.get('https://maker.ifttt.com/trigger/meeseeks/with/key/o69VXHFIIvpjo0CKEbwYNt_OiQbzhyfU-Grlzf8GXdR')
-            off = true
+            off = True
     except KeyboardInterrupt:
         GPIO.cleanup()
         running = False
