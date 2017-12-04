@@ -4,6 +4,11 @@
 # http://raspi.tv/2013/how-to-use-interrupts-with-python-on-the-raspberry-pi-and-rpi-gpio
 import RPi.GPIO as GPIO
 import requests
+import logging
+logging.basicConfig(filename='interrupt1.log',level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
 
 GPIO.setmode(GPIO.BCM)
 
@@ -12,7 +17,6 @@ GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 print "Make sure you have a button connected so that when pressed"
 print "it will connect GPIO port 23 (pin 16) to GND (pin 6)\n"
-raw_input("Press Enter when ready\n>")
 
 print "Waiting for falling edge on port 23"
 # now the program will do nothing until the signal on port 23
@@ -27,6 +31,7 @@ while True:
         GPIO.wait_for_edge(18, GPIO.FALLING)
         print "\nFalling edge detected. Now your program can continue with"
         print "whatever was waiting for a button press."
+        logging.debug('Button pressed, calling IFTTT')
         r = requests.get('https://maker.ifttt.com/trigger/meeseeks/with/key/o69VXHFIIvpjo0CKEbwYNt_OiQbzhyfU-Grlzf8GXdR')
     except KeyboardInterrupt:
         GPIO.cleanup()
