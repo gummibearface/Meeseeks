@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 import requests
 import logging
 logging.basicConfig(filename='interrupt1.log',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 logging.debug('This message should go to the log file')
 
 GPIO.setmode(GPIO.BCM)
