@@ -5,8 +5,10 @@
 import RPi.GPIO as GPIO
 import requests
 import logging
+
+logger = logging.getLogger('interrupt_logger')
 # create file handler which logs even debug messages
-fh = logging.FileHandler('spam.log')
+fh = logging.FileHandler('interrupt.log')
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 fh.setFormatter(formatter)
 logger.addHandler(fh)
