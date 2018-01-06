@@ -5,9 +5,12 @@
 import RPi.GPIO as GPIO
 import requests
 import logging
-logging.basicConfig(filename='interrupt1.log',level=logging.DEBUG)
-logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-logging.debug('This message should go to the log file')
+# create file handler which logs even debug messages
+fh = logging.FileHandler('spam.log')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+logger.debug('This message should go to the log file')
 
 GPIO.setmode(GPIO.BCM)
 
@@ -30,16 +33,16 @@ off = True
 while running:
     try:
         GPIO.wait_for_edge(18, GPIO.FALLING)
-        logging.debug('Button pressed, calling IFTTT')
+        logger.debug('Button pressed, calling IFTTT')
         if off:
-            logging.debug('Turning lights on')
+            logger.debug('Turning lights on')
             r = requests.get('https://maker.ifttt.com/trigger/meeseeks2/with/key/o69VXHFIIvpjo0CKEbwYNt_OiQbzhyfU-Grlzf8GXdR')
             off = False
         else:
-            logging.debug('Turning lights off')
+            logger.debug('Turning lights off')
             r = requests.get('https://maker.ifttt.com/trigger/meeseeks/with/key/o69VXHFIIvpjo0CKEbwYNt_OiQbzhyfU-Grlzf8GXdR')
             off = True
     except KeyboardInterrupt:
         GPIO.cleanup()
         running = False
-logging.debug('Exiting program')
+logger.debug('Exiting program')
