@@ -4,13 +4,14 @@ import os
 import shutil
 import time
 import urllib
-import urllib.request 
+#import urllib.request 
 oldFile = 'interrupt.py'
 newFile = 'interruptNew.py'
 homePi = '/home/pi/'
 githubPath = 'https://raw.githubusercontent.com/gummibearface/Meeseeks/master/interrupt.py'
 
-urllib.request.urlretrieve(githubPath, homePi + newFile)
+urllib.urlretrieve(githubPath, homePi + newFile)
+#urllib.request.urlretrieve(githubPath, homePi + newFile)
 
 
 #If directory doesn't exist create it
